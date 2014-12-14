@@ -1,4 +1,3 @@
-#
 # Copyright (C) 2012 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,24 +11,21 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
-ifeq ($(TARGET_BOARD_PLATFORM),exynos4)
-ifeq ($(TARGET_SLSI_VARIANT),cm)
+LOCAL_PATH:= $(call my-dir)
+# HAL module implemenation, not prelinked and stored in
+# hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.product.board>.so
 
-common_exynos4_dirs := libgralloc_ump libhdmi libhwcomposer libhwconverter libsecion libUMP libIPService
+include $(CLEAR_VARS)
+LOCAL_PRELINK_MODULE := false
+LOCAL_SHARED_LIBRARIES := liblog libcutils libhardware_legacy libutils libbinder
+LOCAL_CFLAGS += -DLOG_TAG=\"IPService\"
 
-ifneq ($(BOARD_USES_PROPRIETARY_LIBCAMERA),true)
-common_exynos4_dirs += libcamera
-endif
+LOCAL_C_INCLUDES := \
+	$(LOCAL_PATH)/../include
 
-ifneq ($(BOARD_USES_PROPRIETARY_LIBFIMC),true)
-common_exynos4_dirs += libfimc
-endif
+LOCAL_SRC_FILES := ExynosIPService.cpp IExynosIP.cpp
 
-exynos4210_dirs := $(common_exynos4_dirs) libs5pjpeg libfimg3x
-exynos4x12_dirs := $(common_exynos4_dirs) libhwjpeg libfimg4x
-
-include $(call all-named-subdir-makefiles,$(common_exynos4_dirs))
-endif
-endif
+LOCAL_MODULE := libExynosIPService
+LOCAL_MODULE_TAGS := optional
+include $(BUILD_SHARED_LIBRARY)
