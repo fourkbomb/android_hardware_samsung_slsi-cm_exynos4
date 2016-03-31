@@ -14,17 +14,20 @@
 # limitations under the License.
 #
 
-ifeq ($(TARGET_BOARD_PLATFORM),exynos10)
+ifeq ($(TARGET_BOARD_PLATFORM),exynos4)
+ifeq ($(TARGET_SLSI_VARIANT),cm)
+
 common_exynos4_dirs := \
     libgralloc_ump   \
     libhdmi          \
-    libfimc          \
+    libexynosfimc          \
     libhwc    \
     libhwconverter   \
     libcamera        \
     smdk_common      \
     multimedia			 \
     libswconverter	 \
+	libion_exynos \
     libswscaler
 
 exynos4210_dirs := $(common_exynos4_dirs) \
@@ -32,12 +35,13 @@ exynos4210_dirs := $(common_exynos4_dirs) \
     libfimg3x
 
 exynos4x12_dirs := $(common_exynos4_dirs) \
-    libhwjpeg        \
-    libfimg4x
+    libhwjpeg
 
 ifeq ($(TARGET_SOC),exynos4210)
   include $(call all-named-subdir-makefiles,$(exynos4210_dirs))
 else
   include $(call all-named-subdir-makefiles,$(exynos4x12_dirs))
+endif
+
 endif
 endif

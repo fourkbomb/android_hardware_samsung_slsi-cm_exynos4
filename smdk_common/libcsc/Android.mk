@@ -1,3 +1,4 @@
+ifeq ($(BOARD_IS_COOL),true)
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -62,3 +63,4 @@ LOCAL_CFLAGS += -DEXYNOS_OMX
 endif
 
 include $(BUILD_SHARED_LIBRARY)
+endif

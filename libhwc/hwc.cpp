@@ -33,7 +33,7 @@
 #include <s3c-fb.h>
 
 #include <EGL/egl.h>
-#include "SecHWCUtils.h"
+#include "ExynosHWCUtils.h"
 
 #define HWC_REMOVE_DEPRECATED_VERSIONS 1
 
@@ -57,10 +57,10 @@
 #include "s5p_tvout_v4l2.h"
 
 #if defined(BOARD_USES_HDMI)
-#include "SecHdmiClient.h"
-#include "SecTVOutService.h"
+#include "ExynosHdmiClient.h"
+#include "ExynosTVOutService.h"
 
-#include "SecHdmi.h"
+#include "ExynosHdmi.h"
 
 //#define CHECK_EGL_FPS
 #ifdef CHECK_EGL_FPS
@@ -284,7 +284,7 @@ static int set_src_dst_img_rect(hwc_layer_1_t *cur,
         }
     }
 
-    SEC_HWC_Log(HWC_LOG_DEBUG,
+    EXYNOS_HWC_Log(HWC_LOG_DEBUG,
             "crop information()::"
             "sourceCrop left(%d),top(%d),right(%d),bottom(%d),"
             "src_rect x(%d),y(%d),w(%d),h(%d),"
@@ -296,12 +296,12 @@ static int set_src_dst_img_rect(hwc_layer_1_t *cur,
             src_rect->x, src_rect->y, src_rect->w, src_rect->h,
             prev_handle->width, prev_handle->height);
 
-    src_rect->x = SEC_MAX(src_rect->x, 0);
-    src_rect->y = SEC_MAX(src_rect->y, 0);
-    src_rect->w = SEC_MAX(src_rect->w, 0);
-    src_rect->w = SEC_MIN(src_rect->w, prev_handle->width);
-    src_rect->h = SEC_MAX(src_rect->h, 0);
-    src_rect->h = SEC_MIN(src_rect->h, prev_handle->height);
+    src_rect->x = EXYNOS_MAX(src_rect->x, 0);
+    src_rect->y = EXYNOS_MAX(src_rect->y, 0);
+    src_rect->w = EXYNOS_MAX(src_rect->w, 0);
+    src_rect->w = EXYNOS_MIN(src_rect->w, prev_handle->width);
+    src_rect->h = EXYNOS_MAX(src_rect->h, 0);
+    src_rect->h = EXYNOS_MIN(src_rect->h, prev_handle->height);
 
     /* 4. Set dst_rect(fb or lcd)
      *    fimc dst image will be stored from left top corner
@@ -312,7 +312,7 @@ static int set_src_dst_img_rect(hwc_layer_1_t *cur,
     dst_rect->h = win->rect_info.h;
 
     /* Summery */
-    SEC_HWC_Log(HWC_LOG_DEBUG,
+    EXYNOS_HWC_Log(HWC_LOG_DEBUG,
             "exynos4_set_src_dst_img_rect()::"
             "SRC w(%d),h(%d),f_w(%d),f_h(%d),fmt(0x%x),"
             "base(0x%x),offset(%d),paddr(0x%X),mem_id(%d),mem_type(%d)=>\r\n"
@@ -637,7 +637,7 @@ static int exynos4_prepare_fimd(exynos4_hwc_composer_device_1_t *pdev,
 
 
     #if defined(BOARD_USES_HDMI)
-    android::SecHdmiClient *mHdmiClient = android::SecHdmiClient::getInstance();
+    android::ExynosHdmiClient *mHdmiClient = android::ExynosHdmiClient::getInstance();
     mHdmiClient->setHdmiHwcLayer(pdev->num_of_hwc_layer);
     #endif
 
@@ -802,7 +802,7 @@ static int exynos4_post_fimd(exynos4_hwc_composer_device_1_t *pdev,
     }
 
 #if defined(BOARD_USES_HDMI)
-        android::SecHdmiClient *mHdmiClient = android::SecHdmiClient::getInstance();
+        android::ExynosHdmiClient *mHdmiClient = android::ExynosHdmiClient::getInstance();
     
         if (skip_hdmi_rendering == 1)
             return 0;
@@ -877,7 +877,7 @@ static int exynos4_post_fimd(exynos4_hwc_composer_device_1_t *pdev,
                                         src_img.format,
                                         (unsigned int)addr->addr_y, (unsigned int)addr->addr_cbcr, (unsigned int)addr->addr_cbcr,
                                         0, 0,
-                                        android::SecHdmiClient::HDMI_MODE_VIDEO,
+                                        android::ExynosHdmiClient::HDMI_MODE_VIDEO,
                                         pdev->num_of_hwc_layer);
             } else if ((src_img.format == HAL_PIXEL_FORMAT_YCbCr_420_SP) ||
                         (src_img.format == HAL_PIXEL_FORMAT_YCrCb_420_SP) ||
@@ -889,7 +889,7 @@ static int exynos4_post_fimd(exynos4_hwc_composer_device_1_t *pdev,
                                         (unsigned int)pdev->fimc.params.src.buf_addr_phy_cb,
                                         (unsigned int)pdev->fimc.params.src.buf_addr_phy_cr,
                                         0, 0,
-                                        android::SecHdmiClient::HDMI_MODE_VIDEO,
+                                        android::ExynosHdmiClient::HDMI_MODE_VIDEO,
                                         pdev->num_of_hwc_layer);
             } else {
                 ALOGE("%s: Unsupported format = %d", __func__, src_img.format);

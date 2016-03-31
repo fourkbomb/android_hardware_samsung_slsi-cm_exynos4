@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+ifeq ($(BOARD_IS_SWAGGY),true)
 LOCAL_PATH:= $(call my-dir)
 # HAL module implemenation, not prelinked and stored in
 # hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.product.board>.so
@@ -31,7 +31,7 @@ LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../include \
 	$(LOCAL_PATH)/../libexynosutils 
 
-LOCAL_SRC_FILES := SecHWCLog.cpp SecHWCUtils.cpp hwc.cpp
+LOCAL_SRC_FILES := ExynosHWCLog.cpp ExynosHWCUtils.cpp hwc.cpp
 
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../libfimg
 
@@ -90,3 +90,4 @@ endif
 LOCAL_MODULE := hwcomposer.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
+endif
