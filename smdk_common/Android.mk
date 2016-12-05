@@ -14,6 +14,6 @@
 # limitations under the License.
 #
 
-common_smdk_dirs := libaudio libaudiohw liblight libstagefrighthw keychars libexynosutils libcsc
+common_smdk_dirs := libaudio libaudiohw liblight keychars libexynosutils libcsc
 
 include $(call all-named-subdir-makefiles,$(common_smdk_dirs))
