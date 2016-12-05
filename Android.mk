@@ -21,7 +21,6 @@ common_exynos4_dirs := \
     libhwconverter   \
     libcamera        \
     smdk_common      \
-    multimedia			 \
     libswconverter	 \
     libswscaler
 
