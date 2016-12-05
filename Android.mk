@@ -17,7 +17,6 @@
 ifeq ($(TARGET_BOARD_PLATFORM),exynos4)
 common_exynos4_dirs := \
     libfimc          \
-    libhwconverter   \
 	libhdmimodule	\
 	libhwcutilsmodule \
 	libdisplaymodule \
