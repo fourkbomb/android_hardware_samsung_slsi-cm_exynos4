@@ -29,7 +29,7 @@ exynos4210_dirs := $(common_exynos4_dirs) \
     libfimg3x
 
 exynos4x12_dirs := $(common_exynos4_dirs) \
-    libhwjpeg        \
+    libhwjpeg
 
 ifeq ($(TARGET_SOC),exynos4210)
   include $(call all-named-subdir-makefiles,$(exynos4210_dirs))
