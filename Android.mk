@@ -18,6 +18,8 @@ ifeq ($(TARGET_BOARD_PLATFORM),exynos4)
 common_exynos4_dirs := \
     libfimc          \
     libhwconverter   \
+	libhwcmodule \
+	libdisplaymodule \
 	libion_exynos	\
     libcamera        \
     smdk_common      \
