@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifeq ($(filter-out exynos4412,$(TARGET_BOARD_PLATFORM)),)
+ifeq ($(filter-out exynos4,$(TARGET_BOARD_PLATFORM)),)
 
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
