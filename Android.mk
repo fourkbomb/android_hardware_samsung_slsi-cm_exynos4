@@ -16,10 +16,8 @@
 
 ifeq ($(TARGET_BOARD_PLATFORM),exynos4)
 common_exynos4_dirs := \
-    libgralloc_ump   \
     libhdmi          \
     libfimc          \
-    libhwc    \
     libhwconverter   \
     libcamera        \
     smdk_common      \
