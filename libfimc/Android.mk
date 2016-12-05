@@ -12,44 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ifeq ($(filter-out exynos4,$(TARGET_BOARD_PLATFORM)),)
+ifeq ($(filter-out exynos4412,$(TARGET_BOARD_PLATFORM)),)
 
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
 LOCAL_PRELINK_MODULE := false
-LOCAL_SHARED_LIBRARIES := liblog libutils libcutils
-ifeq ($(BOARD_SUPPORT_SYSMMU),true)
-LOCAL_SHARED_LIBRARIES+= libMali
-endif
+LOCAL_SHARED_LIBRARIES := liblog libutils libcutils libexynosutils libexynosv4l2
 
-ifeq ($(BOARD_SUPPORT_SYSMMU),true)
-LOCAL_CFLAGS+=-DBOARD_SUPPORT_SYSMMU
-endif
-
-ifeq ($(TARGET_SOC),exynos4210)
-LOCAL_CFLAGS += -DSAMSUNG_EXYNOS4210
-endif
-
-ifeq ($(TARGET_SOC),exynos4x12)
-LOCAL_CFLAGS += -DSAMSUNG_EXYNOS4x12
-endif
-
-ifeq ($(BOARD_USE_V4L2),true)
-LOCAL_CFLAGS += -DBOARD_USE_V4L2
-endif
-
-LOCAL_CFLAGS  += \
-	-DDEFAULT_FB_NUM=$(DEFAULT_FB_NUM)
+# to talk to secure side
+#LOCAL_SHARED_LIBRARIES += libMcClient
+#LOCAL_STATIC_LIBRARIES := libsecurepath
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../include \
-	framework/base/include
+	$(LOCAL_PATH)/../libexynosutils \
+	device/samsung/$(TARGET_DEVICE)/include
 
-LOCAL_SRC_FILES := SecFimc.cpp
+LOCAL_SRC_FILES := exynos_fimc.c
 
 LOCAL_MODULE_TAGS := eng
-LOCAL_MODULE := libfimc
+LOCAL_MODULE := libexynosfimc
 include $(BUILD_SHARED_LIBRARY)
 
 endif
