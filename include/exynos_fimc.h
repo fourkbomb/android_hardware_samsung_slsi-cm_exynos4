@@ -80,7 +80,10 @@ typedef struct {
     uint32_t narrowRgb;
     int      acquireFenceFd;
     int      releaseFenceFd;
+    int      mem_type;
 } exynos_fimc_img;
+
+typedef exynos_fimc_img exynos_mpp_img;
 
 /*
  * Create libfimcaler handle.
@@ -392,6 +395,13 @@ enum {
     FIMC_RESERVED_MODE,
 };
 
+enum {
+    GSC_M2M_MODE = 0,
+    GSC_OUTPUT_MODE,
+    GSC_CAPTURE_MODE,
+    GSC_RESERVED_MODE
+};
+
 /*flag info */
 enum {
     FIMC_DUMMY = 0,
@@ -401,8 +411,34 @@ enum {
 };
 
 enum {
+    GSC_DUMMY = 0,
+    GSC_OUT_FIMD,
+    GSC_OUT_TV,
+    GSC_RESERVED,
+};
+
+enum {
     FIMC_DONE_CNG_CFG = 0,
     FIMC_NEED_CNG_CFG,
+};
+
+enum {
+    GSC_DONE_CNG_CFG = 0,
+    GSC_NEED_CNG_CFG,
+};
+
+enum {
+    FIMC_MEM_MMAP = 1,
+    FIMC_MEM_USERPTR,
+    FIMC_MEM_OVERLAY,
+    FIMC_MEM_DMABUF,
+};
+
+enum {
+    GSC_MEM_MMAP = 1,
+    GSC_MEM_USERPTR,
+    GSC_MEM_OVERLAY,
+    GSC_MEM_DMABUF,
 };
 
 #ifdef __cplusplus
