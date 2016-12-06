@@ -44,7 +44,6 @@
  * \brief API for fimcaler
  * \addtogroup Exynos
  */
-#include "Exynos_log.h"
 
 #ifndef EXYNOS_FIMCALER_H_
 #define EXYNOS_FIMCALER_H_
@@ -55,9 +54,10 @@ extern "C" {
 
 //#define EXYNOS_FIMC_TRACE 0
 #ifdef EXYNOS_FIMC_TRACE
+#include <utils/Log.h>
 #define EXYNOS_FIMC_LOG_TAG "Exynos_fimcaler"
-#define Exynos_fimc_In() Exynos_Log(EXYNOS_DEV_LOG_DEBUG, EXYNOS_FIMC_LOG_TAG, "%s In , Line: %d", __FUNCTION__, __LINE__)
-#define Exynos_fimc_Out() Exynos_Log(EXYNOS_DEV_LOG_DEBUG, EXYNOS_FIMC_LOG_TAG, "%s Out , Line: %d", __FUNCTION__, __LINE__)
+#define Exynos_fimc_In() __android_log_vprint(ANDROID_LOG_DEBUG, EXYNOS_FIMC_LOG_TAG, "%s In , Line: %d", __FUNCTION__, __LINE__)
+#define Exynos_fimc_Out() __android_log_vprint(ANDROID_LOG_DEBUG, EXYNOS_FIMC_LOG_TAG, "%s Out , Line: %d", __FUNCTION__, __LINE__)
 #else
 #define Exynos_fimc_In() ((void *)0)
 #define Exynos_fimc_Out() ((void *)0)

@@ -26,7 +26,7 @@ LOCAL_SHARED_LIBRARIES := liblog libutils libcutils libexynosutils libexynosv4l2
 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../include \
-	$(LOCAL_PATH)/../libexynosutils \
+	$(LOCAL_PATH)/../../exynos/libexynosutils \
 	device/samsung/$(TARGET_DEVICE)/include
 
 LOCAL_SRC_FILES := exynos_fimc.c
