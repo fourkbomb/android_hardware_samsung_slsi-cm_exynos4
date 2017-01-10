@@ -15,6 +15,7 @@
 #
 
 ifeq ($(TARGET_BOARD_PLATFORM),exynos4)
+ifeq ($(TARGET_SLSI_VARIANT),cm)
 common_exynos4_dirs := \
     libfimc          \
 	libion_exynos	\
@@ -34,5 +35,6 @@ ifeq ($(TARGET_SOC),exynos4210)
   include $(call all-named-subdir-makefiles,$(exynos4210_dirs))
 else
   include $(call all-named-subdir-makefiles,$(exynos4x12_dirs))
+endif
 endif
 endif
