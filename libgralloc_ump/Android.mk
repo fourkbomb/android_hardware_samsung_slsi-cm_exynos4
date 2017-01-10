@@ -31,7 +31,8 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils libUMP libGLESv1_CM libsecion
 # Include the UMP header files
 LOCAL_C_INCLUDES += \
     bionic/libc/include \
-    $(LOCAL_PATH)/../include
+    $(LOCAL_PATH)/../include \
+	hardware/samsung_slsi-cm/$(TARGET_SOC)/include
 
 LOCAL_SRC_FILES := \
 	gralloc_module.cpp \
