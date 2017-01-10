@@ -17,7 +17,7 @@
 ifeq ($(TARGET_BOARD_PLATFORM),exynos4)
 ifeq ($(TARGET_SLSI_VARIANT),cm)
 
-common_exynos4_dirs := libgralloc_ump libhdmi libhwcomposer libhwconverter libsecion libUMP libIPService
+common_exynos4_dirs := libhdmi libhwcomposer libhwconverter libsecion libIPService
 
 ifneq ($(BOARD_USES_PROPRIETARY_LIBCAMERA),true)
 common_exynos4_dirs += libcamera
